@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package learning;
+
+// Service definition with all 4 types of RPC
+service LearningService {
+  // 1. Unary RPC - Simple request-response
+  rpc GetUser (UserRequest) returns (UserResponse);
+  
+  // 2. Server streaming RPC - Server sends multiple responses
+  rpc ListUsers (ListUsersRequest) returns (stream UserResponse);
+  
+  // 3. Client streaming RPC - Client sends multiple requests
+  rpc CreateUsers (stream UserRequest) returns (CreateUsersResponse);
+  
+  // 4. Bidirectional streaming RPC - Both sides stream
+  rpc ChatWithUsers (stream ChatMessage) returns (stream ChatMessage);
+}
+
+// Message definitions
+message UserRequest {
+  int32 id = 1;
+  string name = 2;
+  string email = 3;
+}
+
+message UserResponse {
+  int32 id = 1;
+  string name = 2;
+  string email = 3;
+  string created_at = 4;
+  bool success = 5;
+  string message = 6;
+}
+
+message ListUsersRequest {
+  int32 limit = 1;
+  int32 offset = 2;
+}
+
+message CreateUsersResponse {
+  int32 total_created = 1;
+  repeated int32 user_ids = 2;
+  bool success = 3;
+  string message = 4;
+}
+
+message ChatMessage {
+  int32 user_id = 1;
+  string username = 2;
+  string message = 3;
+  string timestamp = 4;
+  string message_type = 5; // "user", "system", "notification"
+}
