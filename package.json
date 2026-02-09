@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node src/server/index.js",
     "start:dev": "nodemon src/server/index.js",
+    "client:demo": "node src/clients/demoClient.js",
     "client:unary": "node src/clients/unaryClient.js",
     "client:server-stream": "node src/clients/serverStreamClient.js",
     "client:client-stream": "node src/clients/clientStreamClient.js",
