@@ -5,7 +5,7 @@ const config = require('../config');
 const logger = require('../utils/logger');
 
 // Import service handlers
-const { getUser, helloUser } = require('../services/unaryService');
+const { getUser, helloUser, getServerInfo } = require('../services/unaryService');
 const { listUsers } = require('../services/serverStreamService');
 const { createUsers } = require('../services/clientStreamService');
 const { chatWithUsers } = require('../services/bidirectionalStreamService');
@@ -34,6 +34,7 @@ function startServer() {
   server.addService(learningProto[config.grpc.serviceName].service, {
     GetUser: getUser, // Unary RPC
     HelloUser: helloUser, // Unary RPC
+    GetServerInfo: getServerInfo, // Demo Unary RPC
     ListUsers: listUsers, // Server streaming RPC
     CreateUsers: createUsers, // Client streaming RPC
     ChatWithUsers: chatWithUsers, // Bidirectional streaming RPC
@@ -61,9 +62,11 @@ function startServer() {
       logger.info('='.repeat(60));
       logger.info('Available RPC Methods:');
       logger.info('  1. GetUser (Unary RPC)');
-      logger.info('  2. ListUsers (Server Streaming RPC)');
-      logger.info('  3. CreateUsers (Client Streaming RPC)');
-      logger.info('  4. ChatWithUsers (Bidirectional Streaming RPC)');
+      logger.info('  2. HelloUser (Unary RPC)');
+      logger.info('  3. GetServerInfo (Demo Unary RPC) ⭐');
+      logger.info('  4. ListUsers (Server Streaming RPC)');
+      logger.info('  5. CreateUsers (Client Streaming RPC)');
+      logger.info('  6. ChatWithUsers (Bidirectional Streaming RPC)');
       logger.info('='.repeat(60));
     }
   );

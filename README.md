@@ -86,25 +86,31 @@ The server will start on `localhost:50051` by default.
 
 Open separate terminal windows and run:
 
-#### 1. Unary RPC Client
+#### 1. Demo Unary RPC Client (⭐ Recommended for beginners)
+```bash
+npm run client:demo
+```
+Demonstrates the simplest unary RPC pattern - getting server information.
+
+#### 2. Unary RPC Client
 ```bash
 npm run client:unary
 ```
 Demonstrates simple request-response pattern.
 
-#### 2. Server Streaming RPC Client
+#### 3. Server Streaming RPC Client
 ```bash
 npm run client:server-stream
 ```
 Demonstrates server streaming multiple responses.
 
-#### 3. Client Streaming RPC Client
+#### 4. Client Streaming RPC Client
 ```bash
 npm run client:client-stream
 ```
 Demonstrates client streaming multiple requests.
 
-#### 4. Bidirectional Streaming RPC Client
+#### 5. Bidirectional Streaming RPC Client
 ```bash
 npm run client:bidirectional
 ```
@@ -187,6 +193,30 @@ NODE_ENV=development   # Environment (development, production)
 ```
 
 ## 📝 API Reference
+
+### GetServerInfo (Demo Unary RPC) ⭐
+Get server information and status.
+
+**Request:**
+```protobuf
+message ServerInfoRequest {
+  // Empty request - no parameters needed
+}
+```
+
+**Response:**
+```protobuf
+message ServerInfoResponse {
+  string server_name = 1;
+  string version = 2;
+  string uptime = 3;
+  int32 total_users = 4;
+  string timestamp = 5;
+  bool success = 6;
+}
+```
+
+---
 
 ### GetUser (Unary RPC)
 Get or create a user by ID, name, or email.

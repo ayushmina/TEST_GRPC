@@ -15,6 +15,9 @@ service LearningService {
 
   rpc HelloUser (helloUserInput) returns (HelloUserResponse);
   
+  // Demo unary RPC - Get server information
+  rpc GetServerInfo (ServerInfoRequest) returns (ServerInfoResponse);
+  
   // 4. Bidirectional streaming RPC - Both sides stream
   rpc ChatWithUsers (stream ChatMessage) returns (stream ChatMessage);
 }
@@ -65,4 +68,18 @@ message ChatMessage {
   string message = 3;
   string timestamp = 4;
   string message_type = 5; // "user", "system", "notification"
+}
+
+// Demo messages for GetServerInfo
+message ServerInfoRequest {
+  // Empty request - no parameters needed
+}
+
+message ServerInfoResponse {
+  string server_name = 1;
+  string version = 2;
+  string uptime = 3;
+  int32 total_users = 4;
+  string timestamp = 5;
+  bool success = 6;
 }

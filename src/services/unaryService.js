@@ -96,10 +96,50 @@ const helloUser = (call, callback) => {
   }
 }
 
+// Track server start time for uptime calculation
+const serverStartTime = Date.now();
+
+/**
+ * DEMO UNARY RPC - Get Server Information
+ * Simple unary function that returns server status and information
+ */
+const getServerInfo = (call, callback) => {
+  try {
+    logger.info('Unary RPC - GetServerInfo called');
+
+    // Calculate uptime in seconds
+    const uptimeSeconds = Math.floor((Date.now() - serverStartTime) / 1000);
+    const hours = Math.floor(uptimeSeconds / 3600);
+    const minutes = Math.floor((uptimeSeconds % 3600) / 60);
+    const seconds = uptimeSeconds % 60;
+    const uptimeFormatted = `${hours}h ${minutes}m ${seconds}s`;
+
+    // Get total users stored in the database
+    const totalUsers = usersDB.size;
+
+    const serverInfo = {
+      server_name: 'gRPC Demo Server',
+      version: '1.0.0',
+      uptime: uptimeFormatted,
+      total_users: totalUsers,
+      timestamp: new Date().toISOString(),
+      success: true,
+    };
+
+    logger.info('Server info retrieved', serverInfo);
+
+    callback(null, serverInfo);
+  } catch (error) {
+    logger.error('Error in getServerInfo', { error: error.message });
+    errorHandler.handleError(error, callback);
+  }
+};
+
 module.exports = {
   getUser,
   usersDB,
   helloUser,
+  getServerInfo,
   getUserIdCounter: () => userIdCounter,
   setUserIdCounter: (value) => {
     userIdCounter = value;
