@@ -81,27 +81,31 @@ function getUserByEmail() {
   setTimeout(() => {
     console.log('3️⃣  Requesting user with email: "jane@example.com"');
 
-    client.GetUser({ id: 0, name: 'Jane Smith', email: 'jane@example.com' }, (error, response) => {
+    client.HelloUser({ name: 'Jane' }, (error, response) => {
       if (error) {
         console.error('❌ Error:', error.message);
         return;
       }
-
       console.log('✅ Response received:');
-      console.log('   User ID:', response.id);
-      console.log('   Name:', response.name);
-      console.log('   Email:', response.email);
-      console.log('   Created At:', response.created_at);
+      console.log('   Success:', response.success);
       console.log('   Message:', response.message);
       console.log('');
-      console.log('='.repeat(60));
-      console.log('✨ Unary RPC demonstration completed!');
-      console.log('='.repeat(60));
+
+    //   console.log('✅ Response received:');
+    //   console.log('   User ID:', response.id);
+    //   console.log('   Name:', response.name);
+    //   console.log('   Email:', response.email);
+    //   console.log('   Created At:', response.created_at);
+    //   console.log('   Message:', response.message);
+    //   console.log('');
+    //   console.log('='.repeat(60));
+    //   console.log('✨ Unary RPC demonstration completed!');
+    //   console.log('='.repeat(60));
     });
   }, 2000);
 }
 
-// Run examples
-getUserById();
-getUserByName();
+// // Run examples
+// getUserById();
+// getUserByName();
 getUserByEmail();

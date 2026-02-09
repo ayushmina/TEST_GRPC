@@ -5,7 +5,7 @@ const config = require('../config');
 const logger = require('../utils/logger');
 
 // Import service handlers
-const { getUser } = require('../services/unaryService');
+const { getUser, helloUser } = require('../services/unaryService');
 const { listUsers } = require('../services/serverStreamService');
 const { createUsers } = require('../services/clientStreamService');
 const { chatWithUsers } = require('../services/bidirectionalStreamService');
@@ -33,6 +33,7 @@ function startServer() {
   // Add service with all handlers
   server.addService(learningProto[config.grpc.serviceName].service, {
     GetUser: getUser, // Unary RPC
+    HelloUser: helloUser, // Unary RPC
     ListUsers: listUsers, // Server streaming RPC
     CreateUsers: createUsers, // Client streaming RPC
     ChatWithUsers: chatWithUsers, // Bidirectional streaming RPC

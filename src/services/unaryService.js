@@ -65,10 +65,41 @@ const getUser = (call, callback) => {
     errorHandler.handleError(error, callback);
   }
 };
+const helloUser = (call, callback) => {
+  try {
+    const { name } = call.request;
+
+    logger.info('Unary RPC - HelloUser called', { name });
+
+    // call.on("data", (request) => {
+    //   logger.info('Received request data', request);
+    // });
+
+    if (!name) {
+      return errorHandler.handleError(
+        errorHandler.invalidArgument('Name parameter is required'),
+        callback
+      );
+    }
+
+    const message = `Hello, ${name}! Welcome to our gRPC service.`;
+
+    logger.info('Generated greeting message', { message });
+
+    callback(null, {
+      success: "true",
+      message,
+    });
+  } catch (error) {
+    logger.error('Error in helloUser', { error: error.message });
+    errorHandler.handleError(error, callback);
+  }
+}
 
 module.exports = {
   getUser,
   usersDB,
+  helloUser,
   getUserIdCounter: () => userIdCounter,
   setUserIdCounter: (value) => {
     userIdCounter = value;

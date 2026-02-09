@@ -12,10 +12,24 @@ service LearningService {
   
   // 3. Client streaming RPC - Client sends multiple requests
   rpc CreateUsers (stream UserRequest) returns (CreateUsersResponse);
+
+  rpc HelloUser (helloUserInput) returns (HelloUserResponse);
   
   // 4. Bidirectional streaming RPC - Both sides stream
   rpc ChatWithUsers (stream ChatMessage) returns (stream ChatMessage);
 }
+
+
+//helloUserInput
+
+message HelloUserResponse {
+  string success = 1;
+  string message = 2;
+}
+message helloUserInput {
+  string name =1;
+}
+
 
 // Message definitions
 message UserRequest {
