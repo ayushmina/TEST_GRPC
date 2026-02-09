@@ -46,7 +46,7 @@ function getServerInfo() {
     console.log('   Server Name:', response.server_name);
     console.log('   Version:', response.version);
     console.log('   Uptime:', response.uptime);
-    console.log('   Active Connections:', response.active_connections);
+    console.log('   Total Users:', response.total_users);
     console.log('   Timestamp:', response.timestamp);
     console.log('   Success:', response.success);
     console.log('');

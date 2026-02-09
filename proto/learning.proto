@@ -79,7 +79,7 @@ message ServerInfoResponse {
   string server_name = 1;
   string version = 2;
   string uptime = 3;
-  int32 active_connections = 4;
+  int32 total_users = 4;
   string timestamp = 5;
   bool success = 6;
 }

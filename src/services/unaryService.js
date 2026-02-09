@@ -114,14 +114,14 @@ const getServerInfo = (call, callback) => {
     const seconds = uptimeSeconds % 60;
     const uptimeFormatted = `${hours}h ${minutes}m ${seconds}s`;
 
-    // Get active connections count (using usersDB size as a proxy)
-    const activeConnections = usersDB.size;
+    // Get total users stored in the database
+    const totalUsers = usersDB.size;
 
     const serverInfo = {
       server_name: 'gRPC Demo Server',
       version: '1.0.0',
       uptime: uptimeFormatted,
-      active_connections: activeConnections,
+      total_users: totalUsers,
       timestamp: new Date().toISOString(),
       success: true,
     };
